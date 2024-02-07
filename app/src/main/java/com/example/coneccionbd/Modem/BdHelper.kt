@@ -11,6 +11,8 @@ class BdHelper(
     override fun onCreate(db: SQLiteDatabase?) {
 
         db?.execSQL(Constantes.TABLA)
+
+        //db?.execSQL("Create table ciudad(codigoCiudad int,  nombreCiudad text, codeDep int)")
         //db?.execSQL(Constantes.TABLA2)
 
     }

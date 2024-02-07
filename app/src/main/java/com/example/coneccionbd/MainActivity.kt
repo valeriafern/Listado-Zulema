@@ -9,7 +9,7 @@ import com.example.coneccionbd.Modem.ManangerDb
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_maps)
 
         //val bdHelper = BdHelper(this)
        // val db = bdHelper.writableDatabase// abro mi bd en mode escritura
