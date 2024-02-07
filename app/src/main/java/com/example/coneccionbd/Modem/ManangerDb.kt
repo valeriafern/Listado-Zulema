@@ -22,15 +22,16 @@ data class ManangerDb(val context: Context) {
 
     }
 
-    fun  inserData():Long{
+    fun  inserData(code:Int,ciudad:String,codep:Int):Long{
 
         openBdWr() // abrir bd en modo escritura
 
         //creo contenedor de valores para insertar data
         val  contenedor =ContentValues()
-        contenedor.put("cod",1)
-        contenedor.put("nombre","cali")
-        contenedor.put("coddep",25)
+        contenedor.put("cod",code)
+        contenedor.put("nombre",ciudad)
+        contenedor.put("coddep",codep
+        )
         //llamo metodo insert
 
         val resul = bd.insert("ciudad",null,contenedor)
@@ -39,4 +40,23 @@ data class ManangerDb(val context: Context) {
 
 
     }
+
+
+    //fun  inserData2():Long{
+
+      //  openBdWr() // abrir bd en modo escritura
+
+        //creo contenedor de valores para insertar data
+       // val  contenedor =ContentValues()
+       // contenedor.put("cod",1)
+       // contenedor.put("nombre","cali")
+       // contenedor.put("coddep",25)
+        //llamo metodo insert
+
+        //val resul = bd.insert("ciudad",null,contenedor)
+       // return  resul
+
+
+
+   // }
 }
