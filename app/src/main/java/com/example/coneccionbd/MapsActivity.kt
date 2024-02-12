@@ -58,9 +58,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val builder = LatLngBounds.Builder()
         builder.include(sydney)
         builder.include(sydney2)
-       builder.include(sydney3)
+        builder.include(sydney3)
         val bounds = builder.build()
         mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 100))
     }
 
-    }
+}

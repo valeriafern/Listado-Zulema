@@ -1,4 +1,9 @@
 package com.example.coneccionbd.Modem
 
-class Ciudad {
+data class Ciudad(val codigo:Int,val nombre:String,val codedep:Int){
+
+
+
 }
+
+

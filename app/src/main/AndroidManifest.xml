@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission
+        android:name="android.permission.ACCESS_FINE_LOCATION"
+        tools:ignore="CoarseFineLocation" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -12,7 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Coneccionbd"
         tools:targetApi="31">
-
+        <activity
+            android:name=".Modem.listarDatos"
+            android:exported="false" />
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 
@@ -29,20 +35,18 @@
             android:value="AIzaSyC162bg5xfftD66bXYjOR5aoyJ2rezey4A" />
 
         <activity
-            android:name=".MapsActivity"
+            android:name=".MainActivity"
             android:exported="true"
-            android:label="@string/title_activity_maps">
+            android:label="MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name=".MainActivity"
-            android:exported="true">
-        </activity>
+            android:name=".MapsActivity"
+            android:exported="true"></activity>
     </application>
 
 </manifest>
