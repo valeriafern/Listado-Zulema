@@ -9,7 +9,10 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.LatLngBounds
 import com.example.coneccionbd.databinding.ActivityMapsBinding
+
+
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -44,5 +47,20 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val sydney = LatLng(2.4832482, -76.56177339999999)
         mMap.addMarker(MarkerOptions().position(sydney).title("estoy en el sena"))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+
+
+        val sydney2 = LatLng(2.4426012180800933,  -76.60512304890526)
+        mMap.addMarker(MarkerOptions().position(sydney2).title("estoy en el parque"))
+
+        val sydney3 = LatLng(2.4345, -76.6224) // Reemplazar latitud2 y longitud2 con las coordenadas de la segunda ubicación adicional
+        mMap.addMarker(MarkerOptions().position(sydney3).title("estoy en el morro"))
+
+        val builder = LatLngBounds.Builder()
+        builder.include(sydney)
+        builder.include(sydney2)
+       builder.include(sydney3)
+        val bounds = builder.build()
+        mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 100))
     }
-}
+
+    }
