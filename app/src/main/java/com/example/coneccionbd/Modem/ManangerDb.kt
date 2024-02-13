@@ -2,88 +2,69 @@ package com.example.coneccionbd.Modem
 
 import android.content.ContentValues
 import android.content.Context
+import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 
 data class ManangerDb(val context: Context) {
 
     lateinit var bd: SQLiteDatabase
 
-    val bdHelper = BdHelper(context)//llamado a mi conexion
+    private val bdHelper = BdHelper(context)
 
-    //metodo para abrir bd en modo escritura
+    // Método para abrir la base de datos en modo escritura
     fun openBdWr() {
-
         bd = bdHelper.writableDatabase
     }
 
-    //abre base de datos modo lectura
-
-
-    fun inserData(code: Int, ciudad: String, codep: Int): Long {
-
-        openBdWr() // abrir bd en modo escritura
-
-        //creo contenedor de valores para insertar data
-        val contenedor = ContentValues()
-        contenedor.put("cod", code)
-        contenedor.put("nombre", ciudad)
-        contenedor.put(
-            "coddep", codep
-        )
-        //llamo metodo insert
-
-        val resul = bd.insert("ciudad", null, contenedor)
-        return resul
-
-
-    }
-
+    // Método para abrir la base de datos en modo lectura
     fun openBdRd() {
         bd = bdHelper.readableDatabase
     }
 
+    // Método para cerrar la base de datos
+    fun closeBd() {
+        bd.close()
+    }
+
+    // Método para insertar datos en la tabla "ciudad"
+    fun inserData(code: Int, ciudad: String, codep: Int): Long {
+        openBdWr() // Abrir la base de datos en modo escritura
+
+        val contenedor = ContentValues().apply {
+            put("cod", code)
+            put("nombre", ciudad)
+            put("coddep", codep)
+        }
+
+        val result = bd.insert("ciudad", null, contenedor)
+        closeBd() // Cerrar la base de datos
+
+        return result
+    }
+
+    // Método para obtener datos de la tabla "ciudad"
     fun getData(): ArrayList<Ciudad> {
-        // Llamar a una función para abrir una base de datos o realizar alguna operación
-        openBdRd()
+        openBdRd() // Abrir la base de datos en modo lectura
         val ciudadlist = ArrayList<Ciudad>()
 
-
-        val cursor = bd.rawQuery(Constantes.TRAER, null)
-        if (cursor.moveToFirst()) {
-
+        val cursor: Cursor? = bd.rawQuery(Constantes.TRAER, null)
+        if (cursor?.moveToFirst() == true) {
             do {
                 val idCiudad = cursor.getColumnIndex("cod")
                 val nombreCiudad = cursor.getColumnIndex("nombre")
-                val codepCiudad = cursor.getColumnIndex("codep")
+                val codepCiudad = cursor.getColumnIndex("coddep")
+                val id = cursor.getString(idCiudad) ?: ""
+                val nombre = cursor.getString(nombreCiudad) ?: ""
+                val cod = cursor.getString(codepCiudad) ?: ""
 
-                val ciudad= Ciudad(idCiudad,nombreCiudad.toString(),codepCiudad)//PASO los valores obtenidos del cursor a mi ibjeto ciudad
-
-                ciudadlist.add(ciudad)// agrego mi objeto ciudad a mi arraylist
-
-
-            } while (cursor.moveToNext())// el ciclo se hace hasta que el cursor se mueva a la siguiente posicion
+                val ciudad = Ciudad(id.toInt(), nombre, cod.toInt())
+                ciudadlist.add(ciudad)
+            } while (cursor.moveToNext())
         }
 
-        return  ciudadlist
+        cursor?.close() // Cerrar el cursor
+        closeBd() // Cerrar la base de datos
 
+        return ciudadlist
     }
-
-
-    //fun  inserData2():Long{
-
-      //  openBdWr() // abrir bd en modo escritura
-
-        //creo contenedor de valores para insertar data
-       // val  contenedor =ContentValues()
-       // contenedor.put("cod",1)
-       // contenedor.put("nombre","cali")
-       // contenedor.put("coddep",25)
-        //llamo metodo insert
-
-        //val resul = bd.insert("ciudad",null,contenedor)
-       // return  resul
-
-
-
-   // }
 }
