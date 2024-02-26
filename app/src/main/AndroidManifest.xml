@@ -5,6 +5,7 @@
     <uses-permission
         android:name="android.permission.ACCESS_FINE_LOCATION"
         tools:ignore="CoarseFineLocation" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -16,9 +17,25 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Coneccionbd"
         tools:targetApi="31">
+
+        <!-- Definir MainActivityPokemon como la actividad de inicio -->
+        <activity
+            android:name=".MainActivityPokemon"
+            android:exported="true"
+            android:label="MainActivityPokemon">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true" />
         <activity
             android:name=".Modem.listarDatos"
             android:exported="false" />
+
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 
@@ -35,18 +52,8 @@
             android:value="AIzaSyC162bg5xfftD66bXYjOR5aoyJ2rezey4A" />
 
         <activity
-            android:name=".MainActivity"
-            android:exported="true"
-            android:label="MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
             android:name=".MapsActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
     </application>
 
 </manifest>
